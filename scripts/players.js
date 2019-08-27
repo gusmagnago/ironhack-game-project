@@ -7,17 +7,18 @@ imageDown.src = `/images/user-blue-down.png`;
 const imageLeft = new Image();
 imageLeft.src = `/images/user-blue-left.png`;
 
-class Player1 {
-  constructor(game, y, pathColor) {
+class Players {
+  constructor(game, y, pathColor, shadowColor,initialDirection) {
     this.canvas = game.canvas;
     this.image = new Image();
-    this.direction = 'up';
+    this.direction = initialDirection;
     this.context = game.context;
-    this.x = 6
+    this.x = 36
     this.y = y
     this.gridSize = 10
     this.path = []
     this.pathColor = pathColor
+    this.shadowColor = shadowColor
 
     // this.vx = 1
     // this.vy = 1
@@ -29,7 +30,7 @@ class Player1 {
     };
   }
 
-  drawPlayer1() {
+  drawPlayers() {
     const width = 45;
     const height = 45;
 
@@ -45,7 +46,7 @@ class Player1 {
     this.path.map(pos => {
       this.context.save()
       this.context.fillStyle = this.pathColor;
-      this.context.shadowColor = '#33FCFF';
+      this.context.shadowColor = this.shadowColor;
       this.context.shadowBlur = 10;
       this.context.fillRect(pos.x * this.gridSize + 10, pos.y * this.gridSize + 40, 10, 10);
       this.context.restore()
