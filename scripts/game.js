@@ -24,13 +24,15 @@ class Game {
       71,
       '#59FAFC',
       '#33FCFF',
-      "up");
+      "up", 
+      'blue');
     this.player2 = new Players(
       this,
       5,
       '#FCFB64',
       '#FFFC00',
-      "down");
+      "down", 
+      'yellow');
     this.board = new Board(this);
   }
 
@@ -139,6 +141,55 @@ class Game {
     }
   }
 
+
+  // movingPlayer2() {
+  //   const player2 = this.player2;
+  //   const direction = player2.direction;
+
+  //   const y = this.player2.y
+  //   const x = this.player2.x
+  //   switch (direction) {
+  //     //not working
+  //     case 'up':
+  //     // if(y > 2) {
+  //       console.log("player2 moving up")
+  //       this.player2.y -= 1;
+  //       this.player2.path.push({
+  //         y,
+  //         x,
+  //       })
+  //     // }
+  //     //Kind of working
+  //     case 'down':
+  //     // if (y <= 70) {
+  //       this.player2.y += 1;
+  //       this.player2.path.push({
+  //         x,
+  //         y,
+  //       })
+  //     // }
+  //     //not working
+  //     case 'right':
+  //     // if (x < 60) {
+  //       this.player2.x += 1;
+  //       this.player2.path.push({
+  //         y,
+  //         x,
+  //       })
+  //     // }
+  //     //working
+  //     case 'left':
+  //         console.log("player2 moving left")
+
+  //     // if (x < 4) {
+  //       this.player2.x -= 1;
+  //       this.player2.path.push({
+  //         y,
+  //         x,
+  //       })
+  //     // }
+  //   }
+  //   }
 
     loop() {
       this.draw();

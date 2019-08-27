@@ -1,16 +1,17 @@
-const imageUp = new Image();
-imageUp.src = `/images/user-blue-up.png`;
-const imageRight = new Image();
-imageRight.src = `/images/user-blue-right.png`;
-const imageDown = new Image();
-imageDown.src = `/images/user-blue-down.png`;
-const imageLeft = new Image();
-imageLeft.src = `/images/user-blue-left.png`;
 
 class Players {
-  constructor(game, y, pathColor, shadowColor,initialDirection) {
+  constructor(game, y, pathColor, shadowColor,initialDirection, imageColor) {
     this.canvas = game.canvas;
-    this.image = new Image();
+    this.imageColor = imageColor
+    this.imageUp = new Image();
+    this.imageUp.src = `/images/user-${this.imageColor}-up.png`;
+    this.imageRight = new Image();
+    this.imageRight.src = `/images/user-${this.imageColor}-right.png`;
+    this.imageDown = new Image();
+    this.imageDown.src = `/images/user-${this.imageColor}-down.png`;
+    this.imageLeft = new Image();
+    this.imageLeft.src = `/images/user-${this.imageColor}-left.png`;
+
     this.direction = initialDirection;
     this.context = game.context;
     this.x = 36
@@ -23,10 +24,10 @@ class Players {
     // this.vx = 1
     // this.vy = 1
     this.images = {
-      up: imageUp,
-      right: imageRight,
-      down: imageDown,
-      left: imageLeft
+      up: this.imageUp,
+      right: this.imageRight,
+      down: this.imageDown,
+      left: this.imageLeft
     };
   }
 
@@ -48,7 +49,7 @@ class Players {
       this.context.fillStyle = this.pathColor;
       this.context.shadowColor = this.shadowColor;
       this.context.shadowBlur = 10;
-      this.context.fillRect(pos.x * this.gridSize + 10, pos.y * this.gridSize + 40, 10, 10);
+      this.context.fillRect(pos.x * this.gridSize + 17, pos.y * this.gridSize + 18, 10, 10);
       this.context.restore()
     })
 
