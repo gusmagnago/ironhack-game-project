@@ -52,7 +52,6 @@ class Players {
       this.context.fillRect(pos.x * this.gridSize + 17, pos.y * this.gridSize + 18, 10, 10);
       this.context.restore()
     })
-
   }
 
   moveUp() {

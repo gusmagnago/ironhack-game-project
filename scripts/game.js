@@ -35,7 +35,9 @@ class Game {
       'yellow');
     this.board = new Board(this);
     this.animations = new Animations(this);
-    this.speed = 200;
+    this.SPEED = 200;
+    this.gameStatus = "game"
+    this.timer = 0
   }
 
   clear() {
@@ -44,16 +46,27 @@ class Game {
     this.context.clearRect(0, 0, width, height);
   }
 
-  drawAlert() {
-    this.animations.drawAlert();
-  }
-
   draw() {
     this.clear();
     this.board.drawBoard();
     this.player1.drawPlayers();
     this.player2.drawPlayers();
-   // this.animations.drawAlert();
+  }
+
+  checkCollisionPlayer1() {
+    for (let pos of this.player2.path) {
+      if (pos.x === this.player1.x && pos.y === this.player1.y) {
+        this.gameStatus = "game-over"
+      }
+    }
+  }
+
+  checkCollisionPlayer2() {
+    for (let pos of this.player1.path) {
+      if (pos.x === this.player2.x && pos.y === this.player2.y) {
+        this.gameStatus = "game-over"
+      }
+    }
   }
 
   movingPlayer1() {
@@ -71,8 +84,7 @@ class Game {
             x
           })
         } else {
-          this.drawAlert();
-          this.speed = 100000;
+          this.gameStatus = "game-over";
         }
         break;
       case 'down':
@@ -83,8 +95,7 @@ class Game {
             x
           })
         } else {
-          this.drawAlert();
-          this.speed = 100000;
+          this.gameStatus = "game-over";
         }
         break;
       case 'right':
@@ -95,8 +106,7 @@ class Game {
             x
           })
         } else {
-          this.drawAlert();
-          this.speed = 100000;
+          this.gameStatus = "game-over";
         }
         break;
       case 'left':
@@ -107,8 +117,7 @@ class Game {
             x
           })
         } else {
-          //this.drawAlert();
-          this.speed = 100000;
+          this.gameStatus = "game-over";
         }
         break;
     }
@@ -129,8 +138,7 @@ class Game {
             x
           })
         } else {
-          this.drawAlert();
-          this.speed = 100000;
+          this.gameStatus = "game-over"
         }
         break;
       case 'down':
@@ -141,8 +149,7 @@ class Game {
             x
           })
         } else {
-          this.drawAlert();
-          this.speed = 100000;
+          this.gameStatus = "game-over"
         }
         break;
       case 'right':
@@ -153,8 +160,7 @@ class Game {
             x
           })
         } else {
-          this.drawAlert();
-          this.speed = 100000;
+          this.gameStatus = "game-over"
         }
         break;
       case 'left':
@@ -165,26 +171,31 @@ class Game {
             x
           })
         } else {
-          this.drawAlert();
-          this.speed = 100000;
+          this.gameStatus = "game-over"
         }
         break;
     }
   }
 
-  loop() {
-      this.draw();
-      this.movingPlayer1();
-      this.movingPlayer2();
-      // window.requestAnimationFrame(() => this.loop());
-      window.setTimeout(() => this.loop(), this.speed);
-    }
+  gameOver() {
+    this.animations.drawAlert();
   }
 
+  loop(timestamp) {
+    if (this.gameStatus === "game") {
+      if (this.timer < timestamp - this.SPEED) {
+        this.draw();
+        this.movingPlayer1();
+        this.movingPlayer2();
+        this.checkCollisionPlayer1();
+        this.checkCollisionPlayer2();
+        this.timer = timestamp;
+      }
+    } else if (this.gameStatus === "game-over") {
+      this.gameOver()
+    }
+    window.requestAnimationFrame((timestamp) => this.loop(timestamp));
+    //window.setTimeout(() => this.loop(), this.speed);
+  }
 
-
-/*     intersectsCell (cell) {
-    const intersection = this.cells.find(item => {
-      return cell[0] === item[0] && cell[1] === item[1];
-    });
-    return !!intersection; */
+}
