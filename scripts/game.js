@@ -24,16 +24,18 @@ class Game {
       71,
       '#59FAFC',
       '#33FCFF',
-      "up", 
+      "up",
       'blue');
     this.player2 = new Players(
       this,
       5,
       '#FCFB64',
       '#FFFC00',
-      "down", 
+      "down",
       'yellow');
     this.board = new Board(this);
+    this.animations = new Animations(this);
+    this.speed = 200;
   }
 
   clear() {
@@ -42,11 +44,16 @@ class Game {
     this.context.clearRect(0, 0, width, height);
   }
 
+  drawAlert() {
+    this.animations.drawAlert();
+  }
+
   draw() {
     this.clear();
     this.board.drawBoard();
     this.player1.drawPlayers();
     this.player2.drawPlayers();
+   // this.animations.drawAlert();
   }
 
   movingPlayer1() {
@@ -57,39 +64,51 @@ class Game {
     const x = this.player1.x
     switch (direction) {
       case 'up':
-        if (y > 2) {
+        if (y > 5) {
           this.player1.y -= 1;
           this.player1.path.push({
             y,
             x
           })
+        } else {
+          this.drawAlert();
+          this.speed = 100000;
         }
         break;
       case 'down':
-        if (y <= 70) {
+        if (y <= 72) {
           this.player1.y += 1;
           this.player1.path.push({
             y,
             x
           })
+        } else {
+          this.drawAlert();
+          this.speed = 100000;
         }
         break;
       case 'right':
-        if (x < 68) {
+        if (x < 66) {
           this.player1.x += 1;
           this.player1.path.push({
             y,
             x
           })
+        } else {
+          this.drawAlert();
+          this.speed = 100000;
         }
         break;
       case 'left':
-        if (x > 4) {
+        if (x > 5) {
           this.player1.x -= 1;
           this.player1.path.push({
             y,
             x
           })
+        } else {
+          //this.drawAlert();
+          this.speed = 100000;
         }
         break;
     }
@@ -103,99 +122,69 @@ class Game {
     const x = this.player2.x
     switch (direction) {
       case 'up':
-        if (y > 2) {
+        if (y > 5) {
           this.player2.y -= 1;
           this.player2.path.push({
             y,
             x
           })
+        } else {
+          this.drawAlert();
+          this.speed = 100000;
         }
         break;
       case 'down':
-        if (y <= 70) {
+        if (y <= 72) {
           this.player2.y += 1;
           this.player2.path.push({
             y,
             x
           })
+        } else {
+          this.drawAlert();
+          this.speed = 100000;
         }
         break;
       case 'right':
-        if (x < 68) {
+        if (x < 66) {
           this.player2.x += 1;
           this.player2.path.push({
             y,
             x
           })
+        } else {
+          this.drawAlert();
+          this.speed = 100000;
         }
         break;
       case 'left':
-        if (x > 4) {
+        if (x > 5) {
           this.player2.x -= 1;
           this.player2.path.push({
             y,
             x
           })
+        } else {
+          this.drawAlert();
+          this.speed = 100000;
         }
         break;
     }
   }
 
-
-  // movingPlayer2() {
-  //   const player2 = this.player2;
-  //   const direction = player2.direction;
-
-  //   const y = this.player2.y
-  //   const x = this.player2.x
-  //   switch (direction) {
-  //     //not working
-  //     case 'up':
-  //     // if(y > 2) {
-  //       console.log("player2 moving up")
-  //       this.player2.y -= 1;
-  //       this.player2.path.push({
-  //         y,
-  //         x,
-  //       })
-  //     // }
-  //     //Kind of working
-  //     case 'down':
-  //     // if (y <= 70) {
-  //       this.player2.y += 1;
-  //       this.player2.path.push({
-  //         x,
-  //         y,
-  //       })
-  //     // }
-  //     //not working
-  //     case 'right':
-  //     // if (x < 60) {
-  //       this.player2.x += 1;
-  //       this.player2.path.push({
-  //         y,
-  //         x,
-  //       })
-  //     // }
-  //     //working
-  //     case 'left':
-  //         console.log("player2 moving left")
-
-  //     // if (x < 4) {
-  //       this.player2.x -= 1;
-  //       this.player2.path.push({
-  //         y,
-  //         x,
-  //       })
-  //     // }
-  //   }
-  //   }
-
-    loop() {
+  loop() {
       this.draw();
       this.movingPlayer1();
       this.movingPlayer2();
       // window.requestAnimationFrame(() => this.loop());
-      window.setTimeout(() => this.loop(), 200);
+      window.setTimeout(() => this.loop(), this.speed);
     }
   }
+
+
+
+/*     intersectsCell (cell) {
+    const intersection = this.cells.find(item => {
+      return cell[0] === item[0] && cell[1] === item[1];
+    });
+    return !!intersection; */
