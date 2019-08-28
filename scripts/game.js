@@ -21,14 +21,14 @@ class Game {
 
     this.player1 = new Players(
       this,
-      71,
+      68,
       '#59FAFC',
       '#33FCFF',
       "up",
       'blue');
     this.player2 = new Players(
       this,
-      5,
+      9,
       '#FCFB64',
       '#FFFC00',
       "down",
@@ -53,21 +53,29 @@ class Game {
     this.player2.drawPlayers();
   }
 
-  checkCollisionPlayer1() {
+  checkCollisions() {
     for (let pos of this.player2.path) {
       if (pos.x === this.player1.x && pos.y === this.player1.y) {
         this.gameStatus = "game-over"
       }
+      for (let pos of this.player1.path) {
+        if (pos.x === this.player1.x && pos.y === this.player1.y) {
+          this.gameStatus = "game-over"
+        }
+      }
     }
-  }
-
-  checkCollisionPlayer2() {
     for (let pos of this.player1.path) {
       if (pos.x === this.player2.x && pos.y === this.player2.y) {
         this.gameStatus = "game-over"
       }
     }
+    for (let pos of this.player2.path) {
+      if (pos.x === this.player2.x && pos.y === this.player2.y) {
+        this.gameStatus = "game-over"
+      }
+    }
   }
+
 
   movingPlayer1() {
     const player1 = this.player1;
@@ -180,6 +188,11 @@ class Game {
   gameOver() {
     this.animations.drawAlert();
   }
+  startTimer() {
+    setTimeout(function () {
+
+    })
+  }
 
   loop(timestamp) {
     if (this.gameStatus === "game") {
@@ -187,8 +200,7 @@ class Game {
         this.draw();
         this.movingPlayer1();
         this.movingPlayer2();
-        this.checkCollisionPlayer1();
-        this.checkCollisionPlayer2();
+        this.checkCollisions();
         this.timer = timestamp;
       }
     } else if (this.gameStatus === "game-over") {

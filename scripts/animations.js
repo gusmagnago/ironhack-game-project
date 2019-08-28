@@ -15,6 +15,5 @@ class Animations {
     const positionY = 300;
     const alertImage = this.alertImage;
     this.context.drawImage(alertImage, positionX, positionY, width, height);
-    console.log("GAME OVER")
   }
 }

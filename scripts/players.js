@@ -21,8 +21,6 @@ class Players {
     this.pathColor = pathColor
     this.shadowColor = shadowColor
 
-    // this.vx = 1
-    // this.vy = 1
     this.images = {
       up: this.imageUp,
       right: this.imageRight,

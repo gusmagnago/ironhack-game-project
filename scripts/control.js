@@ -28,7 +28,6 @@ class Control {
             break;
           case 68:
             this.callbacks2.right();
-            console.log("D key pressed")
             break;
           case 65:
             this.callbacks2.left();
