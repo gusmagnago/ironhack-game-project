@@ -10,7 +10,7 @@ image.src = '/images/FWHIFUU.png';
 window.addEventListener('load', function () {
   game.gameStatus = "menu"
   if(gameStatus = "menu") {
-    context.drawImage(image, 0, 0, 750, 750)    
+    context.drawImage(image, 0, 110, 750, 700)    
     
   }
   document.getElementById("start-button").onclick = function () {
