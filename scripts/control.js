@@ -45,10 +45,3 @@ class Control {
   }
 
 }
-
-/*
-keycode 87(w) = up
-keycode 83(s) = down
-keycode 65(a) = left
-keycode 68(d) = right
-*/

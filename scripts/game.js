@@ -28,20 +28,20 @@ class Game {
       68,
       '#59FAFC',
       '#33FCFF',
-      "up",
+      'up',
       'blue');
     this.player2 = new Players(
       this,
       9,
       '#FCFB64',
       '#FFFC00',
-      "down",
+      'down',
       'yellow');
+
     this.board = new Board(this);
     this.animations = new Animations(this);
- //   this.explosion = new Explosion(this)
     this.SPEED = 150;
-    this.gameStatus = "game"
+    this.gameStatus = 'game'
     this.timer = 0
   }
 
@@ -61,22 +61,22 @@ class Game {
   checkCollisions() {
     for (let pos of this.player2.path) {
       if (pos.x === this.player1.x && pos.y === this.player1.y) {
-        this.gameStatus = "game-over"
+        this.gameStatus = 'game-over'
       }
       for (let pos of this.player1.path) {
         if (pos.x === this.player1.x && pos.y === this.player1.y) {
-          this.gameStatus = "game-over"
+          this.gameStatus = 'game-over'
         }
       }
     }
     for (let pos of this.player1.path) {
       if (pos.x === this.player2.x && pos.y === this.player2.y) {
-        this.gameStatus = "game-over"
+        this.gameStatus = 'game-over'
       }
     }
     for (let pos of this.player2.path) {
       if (pos.x === this.player2.x && pos.y === this.player2.y) {
-        this.gameStatus = "game-over"
+        this.gameStatus = 'game-over'
       }
     }
   }
@@ -97,7 +97,7 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = "game-over";
+          this.gameStatus = 'game-over';
         }
         break;
       case 'down':
@@ -108,7 +108,7 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = "game-over";
+          this.gameStatus = 'game-over';
         }
         break;
       case 'right':
@@ -119,7 +119,7 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = "game-over";
+          this.gameStatus = 'game-over';
         }
         break;
       case 'left':
@@ -130,7 +130,7 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = "game-over";
+          this.gameStatus = 'game-over';
         }
         break;
     }
@@ -151,7 +151,7 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = "game-over"
+          this.gameStatus = 'game-over'
         }
         break;
       case 'down':
@@ -162,7 +162,7 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = "game-over"
+          this.gameStatus = 'game-over'
         }
         break;
       case 'right':
@@ -173,7 +173,7 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = "game-over"
+          this.gameStatus = 'game-over'
         }
         break;
       case 'left':
@@ -184,27 +184,27 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = "game-over"
+          this.gameStatus = 'game-over'
         }
         break;
     }
   }
 
   gameReload() {
-    this.gameStatus = "game"
+    this.gameStatus = 'game'
     this.player1 = new Players(
       this,
       68,
       '#59FAFC',
       '#33FCFF',
-      "up",
+      'up',
       'blue');
     this.player2 = new Players(
       this,
       9,
       '#FCFB64',
       '#FFFC00',
-      "down",
+      'down',
       'yellow');
     this.timer = 0;
 
@@ -213,20 +213,21 @@ class Game {
   gameOver() {
     this.animations.drawAlert();
     this.animations.drawPressStart();
-   // this.animations.drawCollision()
-   // console.log(this.animations.drawCollision())
+
   }
 
   loop(timestamp) {
-    if (this.gameStatus === "game") {
+    if (this.gameStatus === 'game') {
       if (this.timer < timestamp - this.SPEED) {
         this.draw();
-        this.movingPlayer1();
-        this.movingPlayer2();
+        // setTimeout(function () {
+          this.movingPlayer1();
+          this.movingPlayer2();
+        // }, 1500);
         this.checkCollisions();
         this.timer = timestamp;
       }
-    } else if (this.gameStatus === "game-over") {
+    } else if (this.gameStatus === 'game-over') {
       this.gameOver()
     }
     window.requestAnimationFrame((timestamp) => this.loop(timestamp));
