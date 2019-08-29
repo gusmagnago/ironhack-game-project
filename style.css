@@ -1,21 +1,33 @@
 
 body {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* flex-flow: column; */
+/*   justify-content: center;
+  align-items: center; */
   max-width: 900px;
   background: #000000 repeat fixed;
   background-image: url(./images/background.png);
   padding: 50px 400px;
+
 }
 
-.gameboard {
-  background-color: rgba(64, 64, 66, 0.2);
-  box-shadow: inset 0 0 250px #000000;
-}
 
 h1 {
   font-size: 50px;
   color: #013ADF;
   text-align: center;
+}
+
+.first {
+  background-image: url(./html/images/perspective-grid.png);
+  /* z-index: 1; */
+
+}
+.gameboard {
+  background-color: rgba(64, 64, 66, 0.2);
+  box-shadow: inset 0 0 250px #000000;
+  
+}
+canvas {
+  width: 100%
 }

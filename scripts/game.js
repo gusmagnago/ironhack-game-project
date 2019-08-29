@@ -39,7 +39,8 @@ class Game {
       'yellow');
     this.board = new Board(this);
     this.animations = new Animations(this);
-    this.SPEED = 200;
+ //   this.explosion = new Explosion(this)
+    this.SPEED = 150;
     this.gameStatus = "game"
     this.timer = 0
   }
@@ -212,6 +213,8 @@ class Game {
   gameOver() {
     this.animations.drawAlert();
     this.animations.drawPressStart();
+   // this.animations.drawCollision()
+   // console.log(this.animations.drawCollision())
   }
 
   loop(timestamp) {
