@@ -16,7 +16,11 @@ class Game {
       left: () => this.player2.moveLeft('left')
     };
 
-    this.control = new Control(this.callbacks1, this.callbacks2);
+    this.callbackPressEnter = {
+      enter: () => this.gameReload()
+    }
+
+    this.control = new Control(this.callbacks1, this.callbacks2, this.callbackPressEnter);
     this.control.setKeyBindings();
 
     this.player1 = new Players(
@@ -185,13 +189,29 @@ class Game {
     }
   }
 
+  gameReload() {
+    this.gameStatus = "game"
+    this.player1 = new Players(
+      this,
+      68,
+      '#59FAFC',
+      '#33FCFF',
+      "up",
+      'blue');
+    this.player2 = new Players(
+      this,
+      9,
+      '#FCFB64',
+      '#FFFC00',
+      "down",
+      'yellow');
+    this.timer = 0;
+
+  }
+
   gameOver() {
     this.animations.drawAlert();
-  }
-  startTimer() {
-    setTimeout(function () {
-
-    })
+    this.animations.drawPressStart();
   }
 
   loop(timestamp) {

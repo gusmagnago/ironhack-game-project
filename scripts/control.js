@@ -1,14 +1,15 @@
 class Control {
-  constructor(callbacks1, callbacks2) {
+  constructor(callbacks1, callbacks2, callbackPressEnter) {
     this.callbacks1 = callbacks1;
     this.callbacks2 = callbacks2;
+    this.callbackPressEnter = callbackPressEnter;
 
   }
 
   setKeyBindings() {
     window.addEventListener('keydown', event => {
       const key = event.keyCode;
-      if ([38, 39, 37, 40, 65, 68, 83, 87].includes(key)) {
+      if ([13, 38, 39, 37, 40, 65, 68, 83, 87].includes(key)) {
         event.preventDefault();
         switch (key) {
           case 38:
@@ -35,8 +36,10 @@ class Control {
           case 83:
             this.callbacks2.down();
             break;
+          case 13:
+            this.callbackPressEnter.enter();
+            break;
         }
-        //console.log(this.callbacks2.right())
       }
     });
   }
