@@ -9,7 +9,10 @@ const instructions = new Instructions(canvas, context);
 let enterPressed = false
 
 setInterval(function () {
-  context.fillText('PRESS SPACE TO PLAY THE GAME', 100, 780);
+  context.font = '45px Passion One';
+  context.fillText('HIT ´SPACE´ KEY TO PLAY THE GAME', 80, 750);
+  context.font = '20px Passion One';
+  context.fillText('OR ´ENTER´ TO READ THE INSTRUCTIONS', 220, 780);
 }, 200);
 
 game.gameStatus = 'menu'
@@ -20,14 +23,12 @@ window.addEventListener('load', function () {
       context.fillStyle = 'red';
       context.font = '100px Passion One';
       context.fillText('TRONY METRONY', 75, 425);
-      context.fillStyle = 'red';
-      context.font = '50px Passion One';
       context.drawImage(image, 0, 110, 750, 700);
       if (enterPressed) {
         instructions.drawInstructions();
       }
     }
-  }, 200);
+  }, 500);
 })
 
 
