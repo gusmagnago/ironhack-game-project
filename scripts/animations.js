@@ -5,7 +5,7 @@ class Animations {
     //  GAME OVER IMAGES
     this.alertImage = new Image();
     this.alertImage.src = `/images/alert-img.png`;
-
+  
     this.pressToStartImage = new Image();
     this.pressToStartImage.src = `/images/pressStart.png`
   

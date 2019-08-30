@@ -1,3 +1,10 @@
+const SOUNDS = {
+  backgroundMusic: "/sounds/backgroundsound.wav",
+  gameOverSound: "/sounds/collision.wav",
+  instructionsSound: "/sounds/instructionssound.wav"
+};
+
+
 class Game {
   constructor(canvas) {
     this.canvas = canvas;
@@ -43,6 +50,8 @@ class Game {
     this.SPEED = 150;
     this.gameStatus = 'game'
     this.timer = 0
+    this.sound = new Sound();
+    this.sound.loadSounds(SOUNDS);
   }
 
   clear() {
@@ -62,21 +71,33 @@ class Game {
     for (let pos of this.player2.path) {
       if (pos.x === this.player1.x && pos.y === this.player1.y) {
         this.gameStatus = 'game-over'
+        this.sound.play('gameOverSound', {
+          volume: 1
+        })
       }
       for (let pos of this.player1.path) {
         if (pos.x === this.player1.x && pos.y === this.player1.y) {
           this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
       }
     }
     for (let pos of this.player1.path) {
       if (pos.x === this.player2.x && pos.y === this.player2.y) {
         this.gameStatus = 'game-over'
+        this.sound.play('gameOverSound', {
+          volume: 1
+        })
       }
     }
     for (let pos of this.player2.path) {
       if (pos.x === this.player2.x && pos.y === this.player2.y) {
         this.gameStatus = 'game-over'
+        this.sound.play('gameOverSound', {
+          volume: 1
+        })
       }
     }
   }
@@ -97,7 +118,10 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = 'game-over';
+          this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
         break;
       case 'down':
@@ -108,7 +132,10 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = 'game-over';
+          this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
         break;
       case 'right':
@@ -119,7 +146,10 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = 'game-over';
+          this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
         break;
       case 'left':
@@ -130,7 +160,10 @@ class Game {
             x
           })
         } else {
-          this.gameStatus = 'game-over';
+          this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
         break;
     }
@@ -152,6 +185,9 @@ class Game {
           })
         } else {
           this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
         break;
       case 'down':
@@ -163,6 +199,9 @@ class Game {
           })
         } else {
           this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
         break;
       case 'right':
@@ -174,6 +213,9 @@ class Game {
           })
         } else {
           this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
         break;
       case 'left':
@@ -185,6 +227,9 @@ class Game {
           })
         } else {
           this.gameStatus = 'game-over'
+          this.sound.play('gameOverSound', {
+            volume: 1
+          })
         }
         break;
     }
@@ -219,19 +264,21 @@ class Game {
   loop(timestamp) {
     if (this.gameStatus === 'game') {
       if (this.timer < timestamp - this.SPEED) {
+        this.sound.play('backgroundMusic', {
+          volume: 0.5
+        })
         this.draw();
-        // setTimeout(function () {
-          this.movingPlayer1();
-          this.movingPlayer2();
-        // }, 1500);
+        this.movingPlayer1();
+        this.movingPlayer2();
         this.checkCollisions();
         this.timer = timestamp;
       }
     } else if (this.gameStatus === 'game-over') {
       this.gameOver()
+      this.sound.play('backgroundMusic', {
+        volume: 0
+      })
     }
     window.requestAnimationFrame((timestamp) => this.loop(timestamp));
-    //window.setTimeout(() => this.loop(), this.speed);
   }
-
 }

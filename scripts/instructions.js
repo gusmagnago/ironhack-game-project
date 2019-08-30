@@ -4,7 +4,6 @@ class Instructions {
     this.context = context
     this.imageInstructions = new Image()
     this.imageInstructions.src = '/images/instructions.png'
-
   }
 
   drawInstructions() {

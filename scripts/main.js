@@ -8,12 +8,16 @@ image.src = '/images/startpage.png';
 const instructions = new Instructions(canvas, context);
 let enterPressed = false
 
-setInterval(function () {
-  context.font = '45px Passion One';
-  context.fillText('HIT ´SPACE´ KEY TO PLAY THE GAME', 80, 750);
-  context.font = '20px Passion One';
-  context.fillText('OR ´ENTER´ TO READ THE INSTRUCTIONS', 220, 780);
-}, 200);
+
+setTimeout(function () {
+
+  setInterval(function () {
+    context.font = '45px Passion One';
+    context.fillText('HIT ´SPACE´ KEY TO PLAY THE GAME', 75, 750);
+    context.font = '20px Passion One';
+    context.fillText('OR ´ENTER´ TO READ THE INSTRUCTIONS', 222, 780);
+  }, 800);
+}, 2000)
 
 game.gameStatus = 'menu'
 window.addEventListener('load', function () {
@@ -26,10 +30,14 @@ window.addEventListener('load', function () {
       context.drawImage(image, 0, 110, 750, 700);
       if (enterPressed) {
         instructions.drawInstructions();
+        game.sound.play('instructionsSound', {
+          volume: 1
+        })
       }
     }
-  }, 500);
+  }, 800);
 })
+
 
 
 window.addEventListener('keydown', event => {
@@ -43,9 +51,8 @@ window.addEventListener('keydown', event => {
         game.loop();
         break;
       case 13:
-        if (!enterPressed) enterPressed= !enterPressed
-        else enterPressed= !enterPressed
-        console.log(enterPressed)
+        if (!enterPressed) enterPressed = !enterPressed
+        else enterPressed = !enterPressed
         break;
       case 27:
         startGame()
